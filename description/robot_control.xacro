@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+
+<!-- Cấu hình plugin DK để robot có thể nhận lệnh tốc độ từ ROS và di chuyển được trong Gazebo. -->
+
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <gazebo>
+        
+
+        <!-- Plugin DK chuyển động 2 bánh (differential drive) -->
+        <plugin name="diff_drive" filename="libgazebo_ros_diff_drive.so">
+
+            <!-- 🛞 Thông tin bánh xe -->
+
+            <left_joint>left_wheel_joint</left_joint>
+            <right_joint>right_wheel_joint</right_joint>
+
+            <!-- Khoảng cách giữa hai bánh -->
+            <wheel_separation>0.35</wheel_separation>
+
+            <!-- Đường kính bánh xe, trong file robot_core.xacro R = 0.05-->
+            <wheel_diameter>0.1</wheel_diameter>
+
+
+            <!-- mô-men xoắn cực đại-->
+            <!-- ảnh hưởng trực tiếp đến khả năng tăng tốc hoặc vượt chướng ngại của robot -->
+            <!-- quá thấp → robot di chuyển chậm, quá cao → robot phản ứng quá mạn --> 
+            <max_wheel_torque>200</max_wheel_torque>
+
+            <!-- gia tốc góc cực đại -->
+            <!-- Nếu quá thấp → robot khởi động/đổi hướng rất chậm. -->
+            <!-- Nếu quá cao → robot khởi động/đổi hướng rất nhanh-->
+            <max_wheel_acceleration>10.0</max_wheel_acceleration>
+
+            <!-- 🧭 Cấu hình đầu ra (Output settings) -->
+
+            <!-- Frame gốc của real world, giống như điểm (0,0) trên Google Maps -->
+            <!-- Robot sẽ tính toán vị trí so với gốc này -->
+            <odometry_frame>odom</odometry_frame>
+
+            <!-- Frame gốc của robot trong thé giới mô phỏng ( thế giới của robot) -->
+            <robot_base_frame>base_link</robot_base_frame>
+
+            <!-- xuất bản thông tin vị trí (x, y), hướng xoay, và vận tốc hiện tại của robot ra topic /odom.-->
+            <!-- Giống như bạn đang mở ứng dụng bản đồ và thấy: "Xe bạn đang ở vị trí (2.0, 1.0), đang di chuyển với tốc độ 0.3 m/s về phía trước". -->
+            <publish_odom>true</publish_odom>
+
+            <!-- phát TF (transform) giữa 2 khung tọa độ odom (real world) vs base_link (robot world)-->
+            <!-- Giống như biết rằng: "Robot đang ở (x=2m, y=1m), quay 15 độ so với vị trí gốc (0.0) trong real world" -->
+            <publish_odom_tf>true</publish_odom_tf>
+
+            <!-- 🛞 Xuất TF (transform) từ base_link → các bánh xe -->
+            <!-- Trong Google Maps, bạn không chỉ biết xe ở đâu, mà còn biết:
+                - "Bánh trái đang quay tới đâu?"
+                - "Bánh phải đang quay nhanh hơn hay chậm hơn?" -->
+            <publish_wheel_tf>true</publish_wheel_tf>
+
+        </plugin>
+        
+  </gazebo>
+
+</robot>
