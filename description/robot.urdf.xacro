@@ -1,15 +1,12 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro"  name="robot">
 
-    <!-- basic describe: 3 wheels, 1 CHASSIS -->
     <xacro:include filename="robot_core.xacro" />
 
-    <!-- Control 2 wheel: left & right-->
-    <xacro:include filename="robot_control.xacro" />
-
-    <!-- Control lidar-->
+    <!-- <xacro:include filename="gazebo_control.xacro" /> -->
+    <xacro:include filename="ros2_control.xacro" />
     <xacro:include filename="lidar.xacro" />
-
     <xacro:include filename="camera.xacro" />
-
-</robot> 
+    <!-- <xacro:include filename="depth_camera.xacro" /> -->
+    
+</robot>

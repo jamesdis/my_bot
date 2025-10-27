@@ -32,27 +32,23 @@
         <sensor name="laser" type="ray">
             <pose> 0 0 0 0 0 0 </pose>
             <visualize>false</visualize>
-            <update_rate>10</update_rate> <!-- update lidar 10time/s-->
+            <update_rate>10</update_rate>
             <ray>
                 <scan>
                     <horizontal>
-                        <samples>360</samples> <!--mỗi vòng quét sẽ có 360 tia, tương đương 1 tia mỗi độ.-->
-                        <resolution>1</resolution>  <!--mỗi tia quét chỉ có một giá trị đo.-->
+                        <samples>360</samples>
                         <min_angle>-3.14</min_angle>
-                        <max_angle>3.14</max_angle> <!--≈ −180° đến +180°) → nghĩa là LIDAR quét toàn vòng 360° quanh robot.-->
+                        <max_angle>3.14</max_angle>
                     </horizontal>
                 </scan>
                 <range>
-                    <min>0.3</min> <!-- khoảng cách tối thiểu mà cảm biến có thể phát hiện là 0.3 m (gần hơn sẽ không đọc được).-->
+                    <min>0.3</min>
                     <max>12</max>
-                    <resolution>0.01</resolution> <!--độ chính xác đo khoảng cách là 1 cm.-->
                 </range>
             </ray>
-
-            <!-- Plugin is a way to help us interact with things outside gazebo-->
             <plugin name="laser_controller" filename="libgazebo_ros_ray_sensor.so">
                 <ros>
-                    <argument>~/out:=scan</argument> <!-- which topic to publish?-->
+                    <argument>~/out:=scan</argument>
                 </ros>
                 <output_type>sensor_msgs/LaserScan</output_type>
                 <frame_name>laser_frame</frame_name>
