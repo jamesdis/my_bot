@@ -39,7 +39,9 @@
         <sensor name="laser" type="ray">
             <pose> 0 0 0 0 0 0 </pose>
             <visualize>false</visualize>
-            <update_rate>10</update_rate>
+
+                <!-- LDS quay 5Hz ~ 300rpm -->
+            <update_rate>5</update_rate>
             <ray>
                 <scan>
                     <horizontal>
@@ -49,9 +51,19 @@
                     </horizontal>
                 </scan>
                 <range>
-                    <min>0.3</min>
-                    <max>12</max>
+
+                    <!-- Theo datasheet -->
+                    <min>0.12</min>
+                    <max>3.5</max>
                 </range>
+
+                   <!-- Mô phỏng sai số ±10mm --> 
+                <noise>
+                    <type>gaussian</type>
+                    <mean>0.0</mean>
+                    <stddev>0.01</stddev>          
+                </noise>
+
             </ray>
             <plugin name="laser_controller" filename="libgazebo_ros_ray_sensor.so">
                 <ros>
@@ -62,5 +74,12 @@
             </plugin>
         </sensor>
     </gazebo>
+
+
+
+    
+
+
+    
 
 </robot>
