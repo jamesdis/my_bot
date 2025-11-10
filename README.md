@@ -1,3 +1,7 @@
+# Connect Network
+sudo dhclient ens33
+ping -c1 1.1.1.1
+
 🧩 2️⃣ Tinh chỉnh lại trong lidar.xacro (Gazebo)
 <gazebo reference="laser_frame">
   <material>Gazebo/Red</material>
