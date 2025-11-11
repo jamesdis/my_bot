@@ -4,7 +4,7 @@
     <joint name="laser_joint" type="fixed">
         <parent link="chassis"/>
         <child link="laser_frame"/>
-        <origin xyz="0.122 0 0.212" rpy="0 0 0"/>
+        <origin xyz="0.1 0 0.175" rpy="0 0 0"/>
     </joint>
 
     <link name="laser_frame">
@@ -12,14 +12,7 @@
             <geometry>
                 <cylinder radius="0.05" length="0.04"/>
             </geometry>
-            <material name="black"/>
-        </visual>
-        <visual>
-            <origin xyz="0 0 -0.05"/>
-            <geometry>
-                <cylinder radius="0.01" length="0.1"/>
-            </geometry>
-            <material name="black"/>
+            <material name="red"/>
         </visual>
         <collision>
             <geometry>
@@ -34,14 +27,12 @@
 
 
     <gazebo reference="laser_frame">
-        <material>Gazebo/Black</material>
+        <material>Gazebo/Red</material>
 
         <sensor name="laser" type="ray">
             <pose> 0 0 0 0 0 0 </pose>
             <visualize>false</visualize>
-
-                <!-- LDS quay 5Hz ~ 300rpm -->
-            <update_rate>5</update_rate>
+            <update_rate>10</update_rate>
             <ray>
                 <scan>
                     <horizontal>
@@ -51,19 +42,9 @@
                     </horizontal>
                 </scan>
                 <range>
-
-                    <!-- Theo datasheet -->
-                    <min>0.12</min>
-                    <max>3.5</max>
+                    <min>0.3</min>
+                    <max>12</max>
                 </range>
-
-                   <!-- Mô phỏng sai số ±10mm --> 
-                <noise>
-                    <type>gaussian</type>
-                    <mean>0.0</mean>
-                    <stddev>0.01</stddev>          
-                </noise>
-
             </ray>
             <plugin name="laser_controller" filename="libgazebo_ros_ray_sensor.so">
                 <ros>
@@ -74,12 +55,5 @@
             </plugin>
         </sensor>
     </gazebo>
-
-
-
-    
-
-
-    
 
 </robot>
