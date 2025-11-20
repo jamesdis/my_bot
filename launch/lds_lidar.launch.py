@@ -12,7 +12,7 @@ def generate_launch_description():
             name='lds_publisher',
             output='screen',
             parameters=[{
-                'port': '/dev/ttyUSB0',
+                'port': '/dev/ttyUSB1',
                 'frame_id': 'laser_frame',
                 'baud_rate': 230400
             }]
